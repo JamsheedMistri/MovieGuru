@@ -1,4 +1,5 @@
 <h1>All Reviews</h1>
+<!-- Print out all reviews in full -->
 <% @reviews.each do |review| %>
 	<div class="card">
 	  <div class="card-body">
@@ -7,7 +8,7 @@
 	    <p>
 	    	<b>Creator</b>: <%= review["email"] %>
 	    	<br>
-	    	<b>Date</b>: <%= review["date"] %>
+	    	<b>Date</b>: <%= format_date(review["date"]) %>
 	    	<% if review["comment"] != "" %>
 	    		<br>
 	    		<b>Comment</b>: <%= review["comment"] %>

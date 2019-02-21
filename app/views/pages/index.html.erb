@@ -1,3 +1,4 @@
+<!-- Sort pagination -->
 <nav aria-label="Page navigation example">
 	<ul class="pagination" id="sort-by-pagination">
 		<span id="sort-by-label">Sort By:</span>
@@ -10,6 +11,7 @@
 
 <div class="row">
 	<div class="col-md-8">
+		<!-- Print each movie -->
 		<% @movies.each do |movie| %>
 			<div class="card flex-row flex-wrap">
 				<div class="card-header border-0 col-md-4">
@@ -19,7 +21,7 @@
 				<div class="card-block px-2 col-md-8">
 					<h4 class="card-title"><%= movie.title %></h4>
 					<p class="card-text">
-						<b>Release Date</b>: <%= movie.release_date %>
+						<b>Release Date</b>: <%= format_date(movie.release_date) %>
 						<br>
 						<b>Genres</b>:
 						<% movie.genres.each do |genre| %>
@@ -45,7 +47,10 @@
 			</div>
 		<% end %>
 	</div>
+
+	<!-- Right column -->
 	<div class="col-md-4">
+		<!-- Print the recent reviews -->
 		<div class="card">
 		  <div class="card-body">
 		    <h4 class="card-title">Recent Reviews</h4>
@@ -59,6 +64,7 @@
 		    <div class="text-right"><%= link_to 'View All Reviews', reviews_path %></div>
 		  </div>
 		</div>
+		<!-- Print the recent movies -->
 		<div class="card">
 		  <div class="card-body">
 		    <h4 class="card-title">Recent Movies</h4>

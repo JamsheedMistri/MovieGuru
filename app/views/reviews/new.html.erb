@@ -1,3 +1,4 @@
+<!-- Print out any errors if there was an issue with the previous sumbission -->
 <% if @errors != nil && @errors.any? %>
 	<% @errors.each do |msg| %>
 		<div class="alert alert-danger"><%= msg %></div>
@@ -6,7 +7,8 @@
 <h1>Leave a Review</h1>
 <div class="row">
 	<div class="col-md-8">
-		<%= form_for :review, :url => create_review_path do |f| %>
+		<!-- For for leaving a review -->
+		<%= form_for :review, url: create_review_path do |f| %>
 			<p>
 				<%= f.label :email %><br>
 				<%= f.text_field(:email, class: 'form-control') %>
@@ -14,7 +16,7 @@
 
 			<p>
 				<%= f.label :rating %> (out of 5)<br>
-				<%= f.select(:rating, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]], {}, {class: "form-control"} ) %>
+				<%= f.select(:rating, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]], {}, class: "form-control" ) %>
 			</p>
 
 			<p>
@@ -27,13 +29,16 @@
 			</p>
 		<% end %>
 	</div>
+	<!-- Display preview of the movie being reviewed -->
 	<div class="col-md-4">
 		<div class="card">
 		  <img class="card-img-top" src="<%= $images_url + @movie.poster_path %>">
 		  <div class="card-body">
+		  	<!-- Movie title -->
 		    <h4 class="card-title"><%= @movie.title %></h4>
+		    <!-- Movie info -->
 			<p class="card-text">
-				<b>Release Date</b>: <%= @movie.release_date %>
+				<b>Release Date</b>: <%= format_date(@movie.release_date) %>
 				<br>
 				<b>Genres</b>:
 				<% @movie.genres.each do |genre| %>

@@ -1,4 +1,5 @@
 <h1>Movies</h1>
+<!-- Sort pagination -->
 <nav aria-label="Page navigation example">
 	<ul class="pagination" id="sort-by-pagination">
 		<span id="sort-by-label">Sort By:</span>
@@ -11,6 +12,7 @@
 
 <div class="row">
 	<div class="col-md-12">
+		<!-- Print out each movie -->
 		<% @movies.each do |movie| %>
 			<div class="card flex-row flex-wrap">
 				<div class="card-header border-0 col-md-4">
@@ -18,9 +20,11 @@
 					<h1 class="average-rating text-dark"><%= print_average_rating(movie) %></h1>
 				</div>
 				<div class="card-block px-2 col-md-8">
+					<!-- Title -->
 					<h4 class="card-title"><%= movie.title %></h4>
+					<!-- Extra information -->
 					<p class="card-text">
-						<b>Release Date</b>: <%= movie.release_date %>
+						<b>Release Date</b>: <%= format_date(movie.release_date) %>
 						<br>
 						<b>Genres</b>:
 						<% movie.genres.each do |genre| %>
@@ -28,6 +32,7 @@
 						<% end %>
 					</p>
 					
+					<!-- Print out a few select reviews -->
 					<% movie.reviews.each do |review| %>
 						<p>
 							<%= print_rating(review.rating) %>
@@ -36,6 +41,7 @@
 						</p>
 					<% end %>
 
+					<!-- Tell the user if there aren't any reviews -->
 					<% if movie.reviews.length == 0 %>
 						<p>There are currently no ratings for <b><%= movie.title %></b> on MovieGuru. Be the first to add one by clicking below!</p>
 					<% else %>
