@@ -1,0 +1,51 @@
+@import "bootstrap";
+@import "font-awesome";
+
+.nav-link {
+	padding: 0.5rem 2rem !important;
+}
+
+.active {
+	background: rgba(0,0,0,0.1);
+	border-radius: 3px;
+}
+
+.main-content-container {
+	padding-top: 50px;
+}
+
+#sort-by-label {
+	padding-top: 5px;
+	padding-right: 10px;
+}
+
+#sort-by-first-link {
+	border-top-left-radius: 0.25rem !important;
+	border-bottom-left-radius: 0.25rem !important;
+}
+
+.card-block {
+	padding: 10px 20px !important;
+}
+
+.card {
+	margin-bottom: 30px;
+}
+
+.movie-poster {
+	max-width: 100%;
+	border-radius: 4px;
+}
+
+.average-rating {
+	text-align: center;
+	margin: 10px 0 0 0;
+}
+
+.align-title-left {
+	float: left;
+}
+
+.align-rating-right {
+	float: right;
+}

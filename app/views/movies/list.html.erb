@@ -1,0 +1,49 @@
+<h1>Movies</h1>
+<nav aria-label="Page navigation example">
+	<ul class="pagination" id="sort-by-pagination">
+		<span id="sort-by-label">Sort By:</span>
+		<li class="page-item"><%= link_to "None", movies_path(sort: "none"), {class: "#{active("none")} page-link text-dark", id: 'sort-by-first-link'} %></li>
+		<li class="page-item"><%= link_to "Title", movies_path(sort: "title"), class: "#{active("title")} page-link text-dark" %></li>
+		<li class="page-item"><%= link_to "Release Date", movies_path(sort: "release_date"), class: "#{active("release_date")} page-link text-dark" %></li>
+		<li class="page-item"><%= link_to "Genre", movies_path(sort: "genre"), class: "#{active("genre")} page-link text-dark" %></li>
+	</ul>
+</nav>
+
+<div class="row">
+	<div class="col-md-12">
+		<% @movies.each do |movie| %>
+			<div class="card flex-row flex-wrap">
+				<div class="card-header border-0 col-md-4">
+					<img src="<%= $images_url + movie.poster_path %>" class="movie-poster">
+					<h1 class="average-rating text-dark"><%= print_average_rating(movie) %></h1>
+				</div>
+				<div class="card-block px-2 col-md-8">
+					<h4 class="card-title"><%= movie.title %></h4>
+					<p class="card-text">
+						<b>Release Date</b>: <%= movie.release_date %>
+						<br>
+						<b>Genres</b>:
+						<% movie.genres.each do |genre| %>
+							<a class="badge badge-warning"><%= genre.name %></a>
+						<% end %>
+					</p>
+					
+					<% movie.reviews.each do |review| %>
+						<p>
+							<%= print_rating(review.rating) %>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							"<%= review.comment %>" - <b><%= review.email %></b>
+						</p>
+					<% end %>
+
+					<% if movie.reviews.length == 0 %>
+						<p>There are currently no ratings for <b><%= movie.title %></b> on MovieGuru. Be the first to add one by clicking below!</p>
+					<% else %>
+						<%= link_to 'View More', show_movie_path(movie.id), class: "btn btn-dark" %>
+					<% end %>
+					<%= link_to 'Leave a Review', new_review_path(movie.id), class: "btn btn-warning" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

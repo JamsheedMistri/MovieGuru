@@ -1,0 +1,19 @@
+<h1>All Reviews</h1>
+<% @reviews.each do |review| %>
+	<div class="card">
+	  <div class="card-body">
+	    <h4 class="card-title"><%= review["movie_obj"].title %></h4>
+	    <h5 class="card-title"><%= print_rating(review["rating"]) %></h5>
+	    <p>
+	    	<b>Creator</b>: <%= review["email"] %>
+	    	<br>
+	    	<b>Date</b>: <%= review["date"] %>
+	    	<% if review["comment"] != "" %>
+	    		<br>
+	    		<b>Comment</b>: <%= review["comment"] %>
+	    	<% end %>
+	    </p>
+	    <%= link_to 'Show all reviews for <b>'.html_safe + review["movie_obj"].title + '</b>'.html_safe, show_movie_path(review["movie"]), class: "btn btn-warning"%>
+	  </div>
+	</div>
+<% end %>

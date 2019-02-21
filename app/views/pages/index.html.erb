@@ -1,0 +1,76 @@
+<nav aria-label="Page navigation example">
+	<ul class="pagination" id="sort-by-pagination">
+		<span id="sort-by-label">Sort By:</span>
+		<li class="page-item"><%= link_to "None", home_path(sort: "none"), {class: "#{active("none")} page-link text-dark", id: 'sort-by-first-link'} %></li>
+		<li class="page-item"><%= link_to "Title", home_path(sort: "title"), class: "#{active("title")} page-link text-dark" %></li>
+		<li class="page-item"><%= link_to "Release Date", home_path(sort: "release_date"), class: "#{active("release_date")} page-link text-dark" %></li>
+		<li class="page-item"><%= link_to "Genre", home_path(sort: "genre"), class: "#{active("genre")} page-link text-dark" %></li>
+	</ul>
+</nav>
+
+<div class="row">
+	<div class="col-md-8">
+		<% @movies.each do |movie| %>
+			<div class="card flex-row flex-wrap">
+				<div class="card-header border-0 col-md-4">
+					<img src="<%= $images_url + movie.poster_path %>" class="movie-poster">
+					<h1 class="average-rating text-dark"><%= print_average_rating(movie) %></h1>
+				</div>
+				<div class="card-block px-2 col-md-8">
+					<h4 class="card-title"><%= movie.title %></h4>
+					<p class="card-text">
+						<b>Release Date</b>: <%= movie.release_date %>
+						<br>
+						<b>Genres</b>:
+						<% movie.genres.each do |genre| %>
+							<a class="badge badge-warning"><%= genre.name %></a>
+						<% end %>
+					</p>
+					
+					<% movie.reviews.each do |review| %>
+						<p>
+							<%= print_rating(review.rating) %>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							"<%= review.comment %>" - <b><%= review.email %></b>
+						</p>
+					<% end %>
+
+					<% if movie.reviews.length == 0 %>
+						<p>There are currently no ratings for <b><%= movie.title %></b> on MovieGuru. Be the first to add one by clicking below!</p>
+					<% else %>
+						<%= link_to 'View More', show_movie_path(movie.id), class: "btn btn-dark" %>
+					<% end %>
+					<%= link_to 'Leave a Review', new_review_path(movie.id), class: "btn btn-warning" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+		  <div class="card-body">
+		    <h4 class="card-title">Recent Reviews</h4>
+		    <% @recent_reviews.each do |review| %>
+				<p>
+					<%= print_rating(review.rating) %>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					"<%= review.comment %>" - <b><%= review.email %></b>
+				</p>
+			<% end %>
+		    <div class="text-right"><%= link_to 'View All Reviews', reviews_path %></div>
+		  </div>
+		</div>
+		<div class="card">
+		  <div class="card-body">
+		    <h4 class="card-title">Recent Movies</h4>
+		    <% @recent_movies.each do |movie| %>
+				<p>
+					<span class="align-title-left"><%= movie.title %></span>
+					<span class="align-rating-right"><%= print_average_rating(movie) %></span>
+					<div style="clear: both;"></div>
+				</p>
+			<% end %>
+		    <div class="text-right"><%= link_to 'View All Movies', movies_path %></div>
+		  </div>
+		</div>
+	</div>
+</div>
