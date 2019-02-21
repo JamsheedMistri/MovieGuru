@@ -32,3 +32,6 @@
 
 # Ignore TMDb API Key
 /config/initializers/tmdb.rb
+
+# Ignore Gemfile lock
+/Gemfile.lock
