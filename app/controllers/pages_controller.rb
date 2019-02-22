@@ -31,8 +31,18 @@ class PagesController < ApplicationController
     end
 
     # Send the latest 3 reviews to the view
-    @recent_reviews = Review.last(3)
+    @recent_review_objects = Review.last(3)
+
+    # Convert array of reviews to array of hashes with corresponding review data (so we can modify before sending to view)
+    @recent_reviews = []
+    @recent_review_objects.each do |object|
+      @recent_reviews.push(object.attributes)
+    end
+
     @recent_reviews.reverse!
+    @recent_reviews.each do |review|
+      review["movie_obj"] = Tmdb::Movie.detail(review["movie"])
+    end
 
     # Send the latest 3 movies to the view
     @recent_movies = (@movies.sort_by &:release_date).reverse.first(3)
