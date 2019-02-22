@@ -33,7 +33,10 @@
 						<p>
 							<%= print_rating(review.rating) %>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							"<%= review.comment %>" - <b><%= review.email %></b>
+							<% if review.comment != "" %>
+								"<%= review.comment %>" - 
+							<% end %>
+							<b><%= review.email %></b>
 						</p>
 					<% end %>
 
@@ -58,7 +61,10 @@
 				<p>
 					<%= print_rating(review.rating) %>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					"<%= review.comment %>" - <b><%= review.email %></b>
+					<% if review.comment != "" %>
+						"<%= review.comment %>" - 
+					<% end %>
+					<b><%= review.email %></b>
 				</p>
 			<% end %>
 		    <div class="text-right"><%= link_to 'View All Reviews', reviews_path %></div>

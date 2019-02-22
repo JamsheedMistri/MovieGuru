@@ -35,7 +35,7 @@ class PagesController < ApplicationController
     @recent_reviews.reverse!
 
     # Send the latest 3 movies to the view
-    @recent_movies = @movies.reverse.first(3)
+    @recent_movies = (@movies.sort_by &:release_date).reverse.first(3)
   end
 
   # Static about page
