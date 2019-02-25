@@ -13,7 +13,7 @@ First, clone this repository, then install its dependencies by executing:
 bundle install
 ```
 
-Next up, set up the database by running
+Next up, set up the database by running:
 ```bash
 rake db:migrate
 ```
