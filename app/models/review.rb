@@ -10,15 +10,17 @@ end
 # Star validator, to ensure that the review is within the range
 class StarValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    unless value >= 1 && value <= 5
+    unless value != nil && value >= 1 && value <= 5
       record.errors[attribute] << (options[:message] || "is not a valid rating")
     end
   end
 end
 
 class Review < ApplicationRecord
-	# The corresponding movie and date must be present
-	validates :movie, :date, presence: true
+	# The movie must be present and must be an integer
+	validates :movie, numericality: { only_integer: true }, presence: true
+  # The date must be present
+  validates :date, presence: true
 	# The rating must be an integer
 	validates :rating, numericality: { only_integer: true }, star: true
 	# The email must be present and must be a valid email
