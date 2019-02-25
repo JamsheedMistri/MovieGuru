@@ -27,3 +27,38 @@ Finally, start the application:
 ```bash
 rails s
 ```
+
+## Testing
+In order to prepare the database for testing, execute the following command:
+```bash
+rails db:test:prepare
+```
+
+Finally, test the reviews model using the custom cases:
+```bash
+rails test test/models/review_test.rb
+```
+
+## Files Submitted
+* Assets (**app/assets**)
+	* Master stylesheet (**stylesheets/application.scss**)
+* Controllers (**app/controllers**)
+	* Pages controller (**pages_controller.rb**)
+	* Movies controller (**movies_controller.rb**)
+	* Reviews controller (**reviews_controller.rb**)
+* Helpers (**app/helpers**)
+	* Application helper (**application_helper.rb**)
+* Models (**app/models**)
+	* Review model (**review.rb**)
+* Views (**app/views**)
+	* Main layout (**layouts/application.html.erb**)
+	* Movie list (**movies/list.html.erb**)
+	* Show specific movie (**movie/show.html.erb**)
+	* About (**pages/about.html.erb**)
+	* Index (**pages/index.html.erb**)
+	* New review (**reviews/new.html.erb**)
+	* Show all reviews (**show.html.erb**)
+* Public (**public**)
+	* Favicon (**favicon.ico**)
+	* Apple touch icon (**apple-touch-icon.png**)
+	* Precomposed Apple touch icon (**apple-touch-icon-precomposed.png**)
